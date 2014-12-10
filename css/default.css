@@ -1,0 +1,19 @@
+@font-face {
+  font-family: whoa-font;
+  src: url('../fonts/whoa.woff');
+  src: url('../fonts/whoa.ttf');
+}
+.tabu-title {
+  font-family: 'whoa-font', Fallback, sans-serif !important;
+  font-size: 6em !important;
+}
+.headline {
+  background-color: #ccc;
+}
+.mainword {
+  font-size: 4em !important;
+}
+.badwords {
+  font-size: 1.5em !important;
+  margin-bottom: 0px !important;
+}
