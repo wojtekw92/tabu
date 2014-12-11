@@ -11,6 +11,34 @@ var screenHolder=(function(){
                 {color: "#f0f",name:"xrwoni"},
                 {color: "#f0f",name:"xxx"}
   ];
+  var updateScoreBoard = function(scoreTab) {
+    var score1 = document.getElementById('scoreBoard1');
+    var score2 = document.getElementById('scoreBoard2');
+    score1.innerHTML = score2.innerHTML = "<thead><th>drużyna</th><th>punkty</th></thead>"
+    scoreTab.forEach(function(element, index){
+      var newtr = document.createElement('tr');
+      var newName = document.createElement('td');
+      var newPoints = document.createElement('td');
+      newtr.style.color = players[index].color;
+      newName.innerHTML = players[index].name;
+      newPoints.innerHTML = element;
+      newtr.appendChild(newName);
+      newtr.appendChild(newPoints);
+      score1.appendChild(newtr);
+      //score2.appendChild(newtr);
+    });
+  }
+  var updateNextPlayer = function(number) {
+    var nextPlayer = document.getElementById('nextPlayer');
+    nextPlayer.style.color = players[number].color;
+    nextPlayer.innerHTML = players[number].name;
+  }
+  var updateWinner = function(number) {
+    var nextPlayer = document.getElementById('winner');
+    nextPlayer.style.color = players[number].color;
+    nextPlayer.innerHTML = players[number].name;
+  }
+
   var insertWrongWords = function(tab) {
     var container = document.getElementById('wrongWordsContainer');
     var remove = container.getElementsByTagName('p');
@@ -48,7 +76,7 @@ var screenHolder=(function(){
   var getScreenID = function(){
     return scrennIDs[screenNumber-1];
   }
-  var getCofigData = function() {
+  var getConfigData = function() {
    return {
      roundTime: parseInt(document.getElementById('time').value),
      maxPoints: parseInt(document.getElementById('winningPoints').value),
@@ -62,9 +90,70 @@ var screenHolder=(function(){
     insertMainWord: insertMainWord,
     getScreenID: getScreenID,
     changeGameWindow: changeGameWindow,
-    getCofigData: getCofigData
+    getConfigData: getConfigData,
+    updateScoreBoard: updateScoreBoard,
+    updateNextPlayer: updateNextPlayer,
+    updateWinner: updateWinner
 
   }
 
 })();
+var player=0;
+var gameData={};
+var points=[];
+var time;
+var timeInterval;
 screenHolder.changeGameWindow(1);
+document.getElementById('startButton').onclick = function() {
+  gameData = screenHolder.getConfigData();
+  for(var i=0;i<gameData.gamers;i++) points.push(0);
+  screenHolder.changeGameWindow(3);
+  screenHolder.updateScoreBoard(points);
+  screenHolder.updateNextPlayer(player);
+}
+document.getElementById('startNext').onclick = function() {
+  screenHolder.changeGameWindow(2);
+  //zmien hasla
+  changePass();
+  time = 0;
+  timeInterval = setInterval(function(){
+    time++;
+    //console.log(time);
+    if(time==gameData.roundTime) {
+      player++;
+      if(player==gameData.gamers) player = 0;
+      screenHolder.updateScoreBoard(points);
+      screenHolder.updateNextPlayer(player);
+      screenHolder.changeGameWindow(3);
+      clearInterval(timeInterval);
+    }
+  },1000);
+}
+document.getElementById('goodA').onclick = function() {
+  //zmien hasla
+  changePass();
+  points[player]+=gameData.plusPoints;
+  if(points[player]>=gameData.maxPoints) {
+    screenHolder.updateWinner(player);
+    screenHolder.updateScoreBoard(points);
+    clearInterval(timeInterval);
+    screenHolder.changeGameWindow(4);
+  }
+}
+document.getElementById('badA').onclick = function() {
+  //zmien hasla
+  changePass();
+  points[player]+=gameData.minusPoints;
+}
+var changePass= function() {
+  var pass = Math.floor((Math.random() * words.length));
+  screenHolder.insertMainWord(words[pass].word);
+  screenHolder.insertWrongWords(words[pass].bad)
+}
+words=[
+{word:"ala1",bad:["jeb","z","dzidy","a","b"]},
+{word:"ala2",bad:["jeb","z","dzidy","a","b"]},
+{word:"ala3",bad:["jeb","z","dzidy","a","b"]},
+{word:"ala4",bad:["jeb","z","dzidy","a","b"]}
+
+]

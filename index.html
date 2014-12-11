@@ -36,10 +36,10 @@
       <div class="container-fluid">
         <div class="row">
           <div class="col-md-6">
-            <button type="button" class="btn btn-success btn-lg btn-block">DOBRZE</button>
+            <button type="button" class="btn btn-success btn-lg btn-block" id="goodA">DOBRZE</button>
           </div>
           <div class="col-md-6">
-            <button type="button" class="btn btn-danger btn-lg btn-block">ŹLE</button>
+            <button type="button" class="btn btn-danger btn-lg btn-block" id="badA">ŹLE</button>
           </div>
         </div>
       </div>
@@ -67,6 +67,7 @@
               <div class="form-group">
                 <label for="time">Czas(sek)</label>
                 <select class="form-control" id="time">
+                  <option>10</option>
                   <option>40</option>
                   <option>45</option>
                   <option>50</option>
@@ -109,7 +110,7 @@
                   <option>-4</option>
                 </select>
               </div>
-              <button type="button" class="btn btn-success btn-lg btn-block">START!</button>
+              <button type="button" class="btn btn-success btn-lg btn-block" id="startButton">START!</button>
             </form>
           </div>
         </div>
@@ -124,7 +125,7 @@
       <div class="container-fluid">
         <div class="row">
           <div class="col-md-6 col-md-offset-3">
-            <table class="table">
+            <table class="table" id="scoreBoard1">
 
               <thead><th>drużyna</th><th>punkty</th></thead>
               <tr><td>drużyna</td><td>punkty</td></tr>
@@ -139,12 +140,12 @@
         <div class="row">
           <div class="col-md-6 col-md-offset-3">
             <p class ="text-center">Następna drużyna to:</p>
-            <h3 class ="text-center" style="color: #f00;">czerwoni</h3>
+            <h3 class ="text-center" style="color: #f00;" id="nextPlayer">czerwoni</h3>
           </div>
         </div>
         <div class="row">
           <div class="col-md-6 col-md-offset-3">
-            <button type="button" class="btn btn-success btn-lg btn-block">START!</button>
+            <button type="button" class="btn btn-success btn-lg btn-block" id="startNext">START!</button>
           </div>
         </div>
       </div>
@@ -158,7 +159,7 @@
       <div class="container-fluid">
         <div class="row">
           <div class="col-md-6 col-md-offset-3">
-            <table class="table">
+            <table class="table" id="scoreBoard2">
 
               <thead><th>drużyna</th><th>punkty</th></thead>
               <tr><td>drużyna</td><td>punkty</td></tr>
@@ -173,12 +174,12 @@
         <div class="row">
           <div class="col-md-6 col-md-offset-3">
             <h2 class ="text-center">WYGRAŁA DRUŻYNA</h2>
-            <h3 class ="text-center" style="color: #f00;">czerwoni</h3>
+            <h3 class ="text-center" style="color: #f00;" id="winner">czerwoni</h3>
           </div>
         </div>
         <div class="row">
           <div class="col-md-6 col-md-offset-3">
-            <button type="button" class="btn btn-success btn-lg btn-block">JESZCZE RAZ!</button>
+            <button type="button" class="btn btn-success btn-lg btn-block" id="replay">JESZCZE RAZ!</button>
           </div>
         </div>
       </div>
